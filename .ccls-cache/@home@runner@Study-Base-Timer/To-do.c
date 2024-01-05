@@ -12,8 +12,8 @@ Task *tasks = NULL; // NULL wskazuje na pusty obszar pamięci //
 
 int lenght = 0; // Zmienna przechowujęca długość listy //
 
-void addTask(){
-  
+void addTask(const char *task){   // const- wartość nie może zostać zmieniona //
+   tasks = (task *) realloc(tasks, (lenght + 1) * sizeof(Task)); // Relokazlizacja pamięci dostosowanie rozmiaru dynamicznie alokowanej pamięci w trakcie działania programu. Umożliwia dodawać nowe elementy do struktury danych w trakcie działania programu.) //
 } // Funkcja dodająca zadanie do listy //
 
 void markCompleted(){
@@ -23,6 +23,11 @@ void markCompleted(){
 void deleteTask(){
 
 } // Funkcja usuwająca zadnie z listy //
+
+void editTask(){
+  
+} // Funkcja edycji zadania //
+
 
 
 
