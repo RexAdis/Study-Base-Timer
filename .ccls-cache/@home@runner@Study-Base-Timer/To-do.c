@@ -12,5 +12,19 @@ Task *tasks = NULL; // NULL wskazuje na pusty obszar pamięci //
 
 int lenght = 0; // Zmienna przechowujęca długość listy //
 
+void addTask(){
+  
+} // Funkcja dodająca zadanie do listy //
+
+void markCompleted(){
+  
+} // Funkcja zaznaczająca zadanie jako zakończone //
+
+void deleteTask(){
+
+} // Funkcja usuwająca zadnie z listy //
+
+
+
 
 
