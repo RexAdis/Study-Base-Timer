@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "TaskMenager.h"
+#include <time.h>
 
 int main() {
     int choice;
@@ -18,8 +19,9 @@ int main() {
         printf("4. Edytuj zadanie\n");
         printf("5. Usuń zadanie\n");
         printf("6. Zapisz zadania\n");
-        printf("7. Exit\n\n");
-        printf("Wprowadź wybór: 1, 2, 3, 4, 5, 6, 7: ");
+        printf("7. Exit\n");
+        printf("8. Czas zadania\n");
+        printf("Wprowadź wybór: 1, 2, 3, 4, 5, 6, 7, 8: ");
         scanf("%d", &choice);
         printf("\n\n");
 
@@ -33,10 +35,14 @@ int main() {
             addTask(taskInput);
             break;
 
-        case 2:
-            printf("Zadania do wykonania:\n\n");
-            listTasks();
-            break;
+          case 2:
+          printf("Zadania do wykonania:\n\n");
+          listTasks();
+          printf("Wprowadź numer zadania (1-%d), aby rozpocząć śledzenie czasu: ",                         length);
+          scanf("%d", &indexInput);
+          startTaskTimer(indexInput);
+          break;
+
 
         case 3:
             printf("Które zadanie chcesz odhaczyć? \n");
@@ -72,16 +78,26 @@ int main() {
             taskInput[strcspn(taskInput, "\n")] = '\0';
             saveTasksToFile(taskInput);
             break;
+          case 8:  
+                      printf("Które zadanie chcesz sprawdzić czas? \n");{
+                      listTasks();
+                      printf("Wprowadź numer zadania (1-%d), aby sprawdzić czas: ", length);
+                      scanf("%d", &indexInput);
+                      displayTimeSpent(indexInput);
+                      break;
+          }
 
         case 7:
             running = 0;
             break;
 
+        
         default:
             printf("Niepoprawny wybór\n");
             break;
         }
     }
+  
 
     for (int i = 0; i < length; i++) {
         free(tasks[i].task);
@@ -90,3 +106,13 @@ int main() {
 
     return 0;
 }
+
+
+
+
+
+
+
+        
+
+        
