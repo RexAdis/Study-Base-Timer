@@ -115,10 +115,17 @@ void stopTaskTimer(int index) {
   }
 }
 
+
 void displayTimeSpent(int index) {
-  if (index <= length && index > 0) {
-      printf("Czas poświęcony na zadaniu: %ld sekundy\n", tasks[index - 1].timeSpent);
-  } else {
-      printf("Nieprawidłowy indeks zadania.\n");
-  }
+    if (index <= length && index > 0) {
+        long secondsSpent = tasks[index - 1].timeSpent;
+
+        long minutesSpent = secondsSpent / 60;
+        long hoursSpent = minutesSpent / 60;
+
+        printf("Czas poświęcony na zadaniu: %ld godzin, %ld minut, %ld sekund\n",
+               hoursSpent, minutesSpent % 60, secondsSpent % 60);
+    } else {
+        printf("Nieprawidłowy indeks zadania.\n");
+    }
 }
