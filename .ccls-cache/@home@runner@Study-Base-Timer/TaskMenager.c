@@ -82,8 +82,18 @@ void editTask(int index, const char *task) {
     }
 }
 
+
+
 void saveTasksToFile(const char *filename) {
-    FILE *plik = fopen(filename, "w+");
+    // Ścieżka do pulpitu w systemie Windows
+    const char *desktopPath = "C:\\Users\\NazwaUzytkownika\\Desktop\\";
+
+    // Ścieżka do pliku na pulpicie
+    char fullPath[100];
+    strcpy(fullPath, desktopPath);
+    strcat(fullPath, filename);
+
+    FILE *plik = fopen(fullPath, "w+");
     if (plik == NULL) {
         printf("Błąd podczas zapisywanie zapisu.\n");
         return;
@@ -94,7 +104,7 @@ void saveTasksToFile(const char *filename) {
     }
 
     fclose(plik);
-    printf("Zapisano pliko o nazwie %s.\n", filename);
+    printf("Zapisano plik o nazwie %s na pulpicie.\n", filename);
 }
 
 void startTaskTimer(int index) {
@@ -147,6 +157,24 @@ if (dlugosc > 0 && nazwaUzytkownika[dlugosc - 1] == '\n') {
 }
 
 
+void readFromFile(const char *fileName) {
+    FILE *file = fopen(fileName, "r");
+
+    if (file == NULL) {
+        printf("Nie można otworzyć pliku %s do odczytu.\n\n", fileName);
+        return;
+    }
+
+    char line[100];  // Zakładamy, że linia tekstu nie przekroczy 100 znaków
+    while (fgets(line, sizeof(line), file) != NULL) {
+        printf("%s", line);
+    }
+
+    fclose(file);
+}
+
+
+
 
 void* timer(void* arg) {
     
@@ -160,3 +188,18 @@ void* timer(void* arg) {
      
     return NULL;
 }
+
+/* void* timer(void* arg) {
+    while (1) {
+        time_t s = time(NULL);
+        struct tm* current_time = localtime(&s);
+
+        printf("\033[A");   // Move the cursor up one line
+        printf("\033[2K");  // Clear the current line
+        printf("Godzina: %02d:%02d:%02d\n", current_time->tm_hour, current_time->tm_min, current_time->tm_sec);
+
+        sleep(1);  // Pause for one second
+    }
+
+    return NULL;
+} */

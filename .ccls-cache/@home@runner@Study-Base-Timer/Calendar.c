@@ -37,7 +37,7 @@ void calendar() {
         }
 
         for (day = 1; day <= daysInMonth; day++) {
-            printf("%4d", day);
+            printf("%5d", day);
 
             if (++weekDay > 6) {
                 printf("\n");
