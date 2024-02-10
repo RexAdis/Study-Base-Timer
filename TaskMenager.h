@@ -5,8 +5,10 @@ typedef struct { // typdef powoduje że nie musimy pisać aliasow //
   char *task;
   int completed;
   time_t timeSpent;
+  
 } Task;
-
+extern pthread_t timerThread;
+extern char nazwaUzytkownika[10]; 
 // Deklaracja zmiennej globalnej //
 extern Task *tasks;
 extern int length;

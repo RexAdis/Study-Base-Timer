@@ -5,13 +5,26 @@
 #include <time.h>
 
 int main() {
+
+    
     int choice;
     int indexInput;
     int running = 1;
-
+    int nazwaUzytkownikaWprowadzona = 0; 
     char taskInput[100];
+  
+  
 
+    while (!nazwaUzytkownikaWprowadzona) {
+        zapiszNazweUzytkownika();
+        nazwaUzytkownikaWprowadzona = 1; 
+    }
+    
+  
     while (running) {
+        printf("\n");
+      printf("<=============To-Do==============>\n\n");
+        timer();
         printf("\nOpcje\n\n");
         printf("1. Dodaj nazwę zadania\n");
         printf("2. Wyświetl zadania\n");
@@ -19,9 +32,11 @@ int main() {
         printf("4. Edytuj zadanie\n");
         printf("5. Usuń zadanie\n");
         printf("6. Zapisz zadania\n");
-        printf("7. Exit\n");
-        printf("8. Czas zadania\n");
-        printf("Wprowadź wybór: 1, 2, 3, 4, 5, 6, 7, 8: ");
+        printf("7. Czas zadania\n");
+        printf("8. Kalendarz\n");
+        printf("9. Exit\n\n");
+        printf("<===============================>\n");
+        printf("Wprowadź wybór: 1, 2, 3, 4, 5, 6, 7, 8, 9: ");
         scanf("%d", &choice);
         printf("\n\n");
 
@@ -78,7 +93,7 @@ int main() {
             taskInput[strcspn(taskInput, "\n")] = '\0';
             saveTasksToFile(taskInput);
             break;
-          case 8:  
+          case 7:  
                       printf("Które zadanie chcesz sprawdzić czas? \n");{
                       listTasks();
                       printf("Wprowadź numer zadania (1-%d), aby sprawdzić czas: ", length);
@@ -87,7 +102,13 @@ int main() {
                       break;
           }
 
-        case 7:
+
+          case 8:
+          calendar();
+          break;
+        
+          
+          case 9:
             running = 0;
             break;
 
@@ -98,6 +119,7 @@ int main() {
         }
     }
   
+ 
 
     for (int i = 0; i < length; i++) {
         free(tasks[i].task);

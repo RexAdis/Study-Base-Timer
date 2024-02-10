@@ -8,16 +8,18 @@ Task *tasks = NULL;
 int length = 0;
 time_t timeSpent;
 
+
+
 void addTask(const char *task) {
     tasks = (Task *)realloc(tasks, (length + 1) * sizeof(Task));
-    tasks[length].task = (char *)malloc(strlen(task) + 1);
-    tasks[length].completed = 0;
+          tasks[length].task = (char *)malloc(strlen(task) + 1);
+          tasks[length].completed = 0;
 
-    strcpy(tasks[length].task, task);
+          strcpy(tasks[length].task, task);
 
-    length++;
-    printf("Dodano zadanie do wykonania\n\n");
-}
+          length++;
+          printf("Dodano zadanie do wykonania\n\n");
+      }
 
 void listTasks() {
     const char *status;
@@ -105,14 +107,14 @@ void startTaskTimer(int index) {
 }
 
 void stopTaskTimer(int index) {
-  if (index <= length && index > 0 && tasks[index - 1].completed == 0) {
-      time_t currentTime;
-      time(&currentTime);
-      tasks[index - 1].timeSpent += difftime(currentTime, tasks[index - 1].timeSpent); //Oblicza roznice czasu// 
-      printf("Zakończono śledzenie czasu dla zadania.\n");
-  } else {
-      printf("Nieprawidłowy indeks zadania lub zadanie jest już zakończone.\n");
-  }
+    if (index <= length && index > 0 && tasks[index - 1].completed == 0) {
+        time_t currentTime;
+        time(&currentTime);
+        tasks[index - 1].timeSpent = difftime(currentTime, tasks[index - 1].timeSpent);
+        printf("Zakończono śledzenie czasu dla zadania.\n");
+    } else {
+        printf("Nieprawidłowy indeks zadania lub zadanie jest już zakończone.\n");
+    }
 }
 
 
@@ -128,4 +130,33 @@ void displayTimeSpent(int index) {
     } else {
         printf("Nieprawidłowy indeks zadania.\n");
     }
+}
+
+
+
+void zapiszNazweUzytkownika() {
+  char nazwaUzytkownika[10]; 
+
+printf("    Nazwa użytkownika: ");
+fgets(nazwaUzytkownika, sizeof(nazwaUzytkownika), stdin);
+
+size_t dlugosc = strlen(nazwaUzytkownika);
+if (dlugosc > 0 && nazwaUzytkownika[dlugosc - 1] == '\n') {
+    nazwaUzytkownika[dlugosc - 1] = '\0';
+}
+}
+
+
+
+void* timer(void* arg) {
+    
+        time_t s = time(NULL);
+        struct tm* current_time = localtime(&s);
+
+        printf("\033[A");   // Przesunięcie kursora o jedną linię w górę
+        printf("\033[2K");  // Wyczyszczenie bieżącej linii
+        printf("Godzina: %02d:%02d:%02d\n", current_time->tm_hour, current_time->tm_min, current_time->tm_sec);
+
+     
+    return NULL;
 }
