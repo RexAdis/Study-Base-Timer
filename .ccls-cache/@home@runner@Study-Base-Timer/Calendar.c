@@ -5,6 +5,7 @@
 #include <time.h>
 
 
+
 int get_1st_weekday(int year) {
     int d;
     d = ((year - 1) * 365 + (year - 1) / 4 - (year - 1) / 100 + (year) / 400 + 1) % 7;
@@ -22,15 +23,17 @@ void calendar() {
     if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
         monthDay[1] = 29;
 
-    startingDay = get_1st_weekday(year);
-
     for (month = 0; month < 12; month++) {
         daysInMonth = monthDay[month];
         printf("\n\n--------------%s--------------\n", months[month]);
-        printf("\n  Pon  Wt  Sr  Czw  Pt  Sob  Niedz");
+        printf("\n  Pon  Wt  Śr  Czw  Pt  Sob  Niedz");
 
-        for (weekDay = 0; weekDay < startingDay; weekDay++) {
-            printf("\n\n   ");
+        // Calculate spacing based on month name length
+        int monthNameLength = strlen(months[month]);
+        int spacing = (28 - monthNameLength) / 2;
+
+        for (weekDay = 0; weekDay < spacing; weekDay++) {
+            printf("    ");
         }
 
         for (day = 1; day <= daysInMonth; day++) {
@@ -42,6 +45,6 @@ void calendar() {
             }
         }
 
-        startingDay = weekDay;
+        printf("\n");
     }
 }
