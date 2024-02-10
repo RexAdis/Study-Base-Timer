@@ -4,9 +4,12 @@
 #include "TaskMenager.h"
 #include <time.h>
 
+
+
 int main() {
 
-    
+    const char *fileName = "your_file.txt";
+    readFromFile(fileName);
     int choice;
     int indexInput;
     int running = 1;
@@ -34,9 +37,10 @@ int main() {
         printf("6. Zapisz zadania\n");
         printf("7. Czas zadania\n");
         printf("8. Kalendarz\n");
-        printf("9. Exit\n\n");
+        printf("9. Wczytaj plik\n\n");
+        printf("10. Exit\n\n");
         printf("<===============================>\n");
-        printf("Wprowadź wybór: 1, 2, 3, 4, 5, 6, 7, 8, 9: ");
+        printf("Wprowadź wybór: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10: ");
         scanf("%d", &choice);
         printf("\n\n");
 
@@ -107,8 +111,11 @@ int main() {
           calendar();
           break;
         
-          
           case 9:
+          readFromFile(fileName);
+          break;
+          
+          case 10:
             running = 0;
             break;
 

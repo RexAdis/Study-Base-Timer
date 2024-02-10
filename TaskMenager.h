@@ -1,11 +1,18 @@
 #ifndef TaskMenager_H // sprawdza czy nie ma takiego pliku //
 #define TaskMenager_H
 
+
+typedef struct {
+  
+  int Zegrki;
+  char slowa[10];
+}non;
+
 typedef struct { // typdef powoduje że nie musimy pisać aliasow //
   char *task;
   int completed;
   time_t timeSpent;
-  
+  non skladnia;  
 } Task;
 extern pthread_t timerThread;
 extern char nazwaUzytkownika[10]; 
@@ -23,5 +30,6 @@ void deleteTask(int index);
 void editTask(int index, const char *task);
 void saveTasksToFile(const char *filename);
 char loadTasksFromFile(const char *filename, char ch);
+
 
 #endif // konczy dyrektywe //
